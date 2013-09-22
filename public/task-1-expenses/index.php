@@ -7,8 +7,6 @@ $title = 'Списък';
 $categories = get_categories();
 
 $data = get_expenses();
-$totalNumber = count($data);
-$totalCost = calc_total_cost($data);
 $options = array('' => 'всички') + $categories;
 $defaultOption = NULL;
 
@@ -31,6 +29,9 @@ if (!isset($filteredExpenses))
 {
     $filteredExpenses = $data;
 }
+
+$totalNumber = count($filteredExpenses);
+$totalCost = calc_total_cost($filteredExpenses);
 
 // Convert model data to human readable
 $expenses = humanize_expense_data($filteredExpenses, $categories);
