@@ -1,0 +1,101 @@
+* {
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+}
+input,
+textarea,
+button,
+select {
+    padding: 4px 8px;
+}
+
+table {
+    margin: 10px;
+    border-collapse:collapse;
+}
+th,
+td {
+    padding: 2px 4px;
+    border: 1px solid grey;
+}
+
+th {
+    background: #333;
+    color: #eee;
+    font-family: sans-serif;
+    font-size: 1.1em;
+}
+
+tr:nth-child(odd) td {
+    background: #ddd;
+}
+
+tr:nth-child(even) td {
+    background: #eee;
+}
+
+header {
+    padding: 0px 20px;
+}
+
+#left {
+    position: fixed;
+    margin: 10px;
+    padding: 10px;
+    width: 250px;
+}
+
+#content {
+    margin: 10px;
+    margin-left: 270px;
+    padding: 10px;
+    border-left: 1px solid black;
+}
+#form {
+    font-size: 1.1em;
+}
+#form label {
+    display: inline-block;
+    margin: 0.5em;
+    width: 350px;
+}
+#form input,
+#form textarea,
+#form select {
+    float: right;
+    width: 70%;
+}
+#form button {
+    margin: 0.5em;
+    width: 350px;
+    font-size: 1.5em;
+}
+.errors {
+    background: lightpink;
+    color: red;
+}
+.success {
+    background: lightgreen;
+    color: green;
+}
+.msg {
+    margin: 5px;
+    font-style: italic;
+}
+.msg-container {
+    padding: 10px;
+    padding-top: 0px;
+}
+.msg-container h1 {
+    margin: 5px;
+    font-size: 1.2em;
+}
+.info {
+    display: inline-block;
+    margin: 5px;
+    font-size: 0.9em;
+    color: grey;
+}
