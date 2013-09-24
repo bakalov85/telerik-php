@@ -49,12 +49,12 @@ function get_expenses()
  * @param array $data
  * @return boolean
  */
-function save_expense($data)
+function save_expense($data, $filename)
 {
     $data[] = time();
     $row = generate_data_row($data);
 
-    return file_put_contents('./data/expenses.txt', $row, FILE_APPEND);
+    return file_put_contents($filename, $row, FILE_APPEND);
 }
 
 /**

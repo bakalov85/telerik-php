@@ -40,7 +40,7 @@ if ($_POST)
         $data = array($label, $category, $cost);
         
         // If save is successfull
-        if (save_expense($data))
+        if (save_expense($data, $GLOBALS['config']['expenses_path']))
         {
             $success = 'Успешен запис на "' . $label . '"';
         }
@@ -69,7 +69,7 @@ if ($_POST)
             </p>
             <label>
                 тип:
-<?= input_select('category', $categories); ?>
+<?= input_select('category', $categories); ?>   
             </label>
             <p class="info">
                 * Тип/категория/група на направения разход
