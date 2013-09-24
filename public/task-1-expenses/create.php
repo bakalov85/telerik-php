@@ -14,11 +14,10 @@ if ($_POST)
     $cost = round((float) $_POST['cost'], 2);
 
     $errors = array();
-    $labelLength = mb_strlen($label);
 
     // Validation
     // Validate label - should be proper length
-    if ($labelLength < $GLOBALS['config']['label_min'])
+    if (mb_strlen($label, 'UTF-8') < $GLOBALS['config']['label_min'])
     {
         $errors[] = 'Неподходяща дължина на полето за име на разхода.';
     }
