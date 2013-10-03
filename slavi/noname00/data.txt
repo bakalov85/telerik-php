@@ -1,0 +1,6 @@
+date:25.09.2013|type:1|name:Shopping for the week|sum:99,99|
+date:25.09.2013|type:3|name:Tennis|sum:45,99|
+date:25.09.2013|type:4|name:Shoes|sum:99,99|
+date:25.09.2013|type:4|name:Jeans|sum:75,00|
+date:26.09.2013|type:2|name:sdfsd|sum:df|
+date:26.09.2013|type:1|name:g:sdgvgsa|dfsgbdf:bdv||sum:dwfsf|
