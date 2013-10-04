@@ -13,6 +13,8 @@ if ($_POST && $_FILES)
 {
     $filename = (isset($_POST['filename']) && $_POST['filename']) ? trim($_POST['filename']) : trim($_FILES['file']['name']);
 
+    $filename = str_replace(array('../', './'), '', $filename);
+    
     if (strlen($filename) > $GLOBALS['config']['max_filename'])
     {
         $errors[] = 'Името на файла трябва да е не по-дълго от ' . $GLOBALS['config']['max_filename'];
