@@ -55,14 +55,14 @@ if ($_POST && $_FILES)
             <input type="text" name="filename">
         </label>
         <p class="info">
-            Незадължително поле, до <?= $GLOBALS['config']['max_filename']; ?> латински символа, тирета и цифри.
+            * Незадължително поле, до <?= $GLOBALS['config']['max_filename']; ?> латински символа, тирета и цифри.
         </p>
         <label>
             Файл:
             <input type="file" name="file">
         </label>
         <p class="info">
-            Максимален размер от 8 МВ.
+            * Максимален размер от 8 МВ.
         </p>
         <br />
         <button type="submit">Изпрати</button>
