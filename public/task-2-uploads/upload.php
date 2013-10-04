@@ -30,7 +30,7 @@ if ($_POST && $_FILES)
             $filename .= '.' . pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
         }
         
-        if (move_uploaded_file($filename, get_user_file_path($filename)))
+        if (move_uploaded_file($_FILES['file']['tmp_name'], get_user_file_path($filename)))
         {
             $success = 'Файла <b>' . $filename . '</b> е успешно качен!';
         }
