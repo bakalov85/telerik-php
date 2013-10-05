@@ -3,12 +3,12 @@ include './app/config.php';
 include './app/utilities.php';
 include './app/connector.php';
 
-$title = 'Регистрация';
-
 if (is_logined())
 {
     redirect_to('messages');
 }
+
+$title = 'Регистрация';
 
 $menu = array(
     'index.php' => 'Вход'
@@ -16,42 +16,46 @@ $menu = array(
 
 if ($_POST)
 {
+    // Get post variables
     $username = (isset($_POST['username'])) ? $_POST['username'] : '';
     $password = (isset($_POST['password'])) ? $_POST['password'] : '';
     $passwordConfirm = (isset($_POST['password2'])) ? $_POST['password2'] : '';
-    
+
+    // Normalize data
     $username = trim($username);
     $password = trim($password);
     $passwordConfirm = trim($passwordConfirm);
 
-    $usernameLength = mb_strlen($username);
-    $passwordLength = mb_strlen($password);
-
-    if ($usernameLength < $GLOBALS['config']['min_username'] || $usernameLength > $GLOBALS['config']['max_username'])
+    // Validate length
+    if (!validate_strlen($username, $GLOBALS['config']['min_username'], $GLOBALS['config']['max_username']))
     {
         $errors[] = "Потребителското име трябва да е с дължина между {$GLOBALS['config']['min_username']} и {$GLOBALS['config']['max_username']} символа.";
     }
 
-    if ($passwordLength < $GLOBALS['config']['min_password'] || $passwordLength > $GLOBALS['config']['max_password'])
+    if (!validate_strlen($password, $GLOBALS['config']['min_password'], $GLOBALS['config']['max_password']))
     {
         $errors[] = "Паролата трябва да е с дължина между {$GLOBALS['config']['min_password']} и {$GLOBALS['config']['max_password']} символа.";
     }
 
+    // Validate characters
     if (!is_valid_username($username))
     {
         $errors[] = 'Потребителското име трябва да съдържа само латински букви, цифри или долно тире.';
     }
 
+    // Check if username is available
     if (!is_username_available($username))
     {
         $errors[] = "Потребителското име \"{$username}\" вече е заето, моля изберете различно име.";
     }
 
+    // Whether passwords match
     if ($password != $passwordConfirm)
     {
         $errors[] = 'Паролите не съвпадат.';
     }
 
+    // If there are not errors, try to register
     if (!isset($errors))
     {
         if (register_user($username, $password))

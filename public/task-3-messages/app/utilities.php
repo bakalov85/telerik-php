@@ -193,3 +193,15 @@ function display_errors($errors)
     }
     return $html;
 }
+
+function validate_strlen($str, $min, $max = FALSE)
+{
+    $length = mb_strlen($str);
+
+    if ($length >= $min && ($max === FALSE || $length <= $max))
+    {
+        return TRUE;
+    }
+
+    return FALSE;
+}

@@ -49,6 +49,7 @@ header {
 }
 
 #content {
+    position: relative;
     margin: 10px;
     margin-left: 270px;
     padding: 10px;
@@ -98,4 +99,27 @@ header {
     margin: 5px;
     font-size: 0.9em;
     color: grey;
+}
+
+.preview:hover+.preview-container {
+    opacity: 1;
+    height: auto;
+    width: auto;
+    padding: 10px;
+    margin-left: -50px;
+}
+.preview+.preview-container {
+    position: absolute;
+    overflow: hidden;
+    width: 0px;
+    height: 0px;
+    opacity: 0;
+    background: #333;
+    color: #eee;
+    
+    -webkit-transition: opacity 0.5s;
+    -moz-transition: opacity 0.5s;
+    -ms-transition: opacity 0.5s;
+    -o-transition: opacity 0.5s;
+    transition: opacity 0.5s;
 }
