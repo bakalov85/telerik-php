@@ -5,6 +5,11 @@ include './app/connector.php';
 
 $title = 'Регистрация';
 
+if (is_logined())
+{
+    redirect_to('messages');
+}
+
 $menu = array(
     'index.php' => 'Вход'
 );
