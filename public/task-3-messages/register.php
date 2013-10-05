@@ -11,10 +11,13 @@ $menu = array(
 
 if ($_POST)
 {
-//    if (isset())
-    $username = trim(@$_POST['username']);
-    $password = trim(@$_POST['password']);
-    $passwordConfirm = trim(@$_POST['password2']);
+    $username = (isset($_POST['username'])) ? $_POST['username'] : '';
+    $password = (isset($_POST['password'])) ? $_POST['password'] : '';
+    $passwordConfirm = (isset($_POST['password2'])) ? $_POST['password2'] : '';
+    
+    $username = trim($username);
+    $password = trim($password);
+    $passwordConfirm = trim($passwordConfirm);
 
     $usernameLength = mb_strlen($username);
     $passwordLength = mb_strlen($password);
