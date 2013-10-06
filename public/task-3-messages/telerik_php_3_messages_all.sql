@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `telerik_php_3_messages`
 --
-CREATE DATABASE `telerik_php_3_messages` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS `telerik_php_3_messages` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `telerik_php_3_messages`;
 
 -- --------------------------------------------------------
@@ -33,10 +33,10 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `user_id` int(10) unsigned NOT NULL,
   `subject` varchar(50) NOT NULL,
   `content` varchar(250) NOT NULL,
-  `date_created` int(10) NOT NULL,
+  `date_created` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -56,3 +56,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+GRANT ALL ON  `telerik_php_3_messages` . * TO 'telerik_php'@'localhost' IDENTIFIED BY 'password';
+FLUSH PRIVILEGES;
