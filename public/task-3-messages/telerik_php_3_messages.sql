@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 05, 2013 at 11:40 PM
+-- Generation Time: Oct 06, 2013 at 01:15 PM
 -- Server version: 5.5.32-0ubuntu0.13.04.1
 -- PHP Version: 5.4.9-4ubuntu2.3
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `telerik_php_3_messages`
 --
+CREATE DATABASE `telerik_php_3_messages` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `telerik_php_3_messages`;
 
 -- --------------------------------------------------------
 

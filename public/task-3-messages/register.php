@@ -58,7 +58,7 @@ if ($_POST)
     // If there are not errors, try to register
     if (!isset($errors))
     {
-        if (register_user($username, $password))
+        if (register($username, $password))
         {
             redirect_to('index');
         }

@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Creates connection to the database
+ * @return source|boolean
+ */
 function get_connection()
 {
     $conf = $GLOBALS['config']['db'];
@@ -13,12 +16,18 @@ function get_connection()
     return FALSE;
 }
 
+/**
+ * If username is unique through the database
+ * @param string $username
+ * @return boolean
+ */
 function is_username_available($username)
 {
     $connection = get_connection();
 
     if ($connection)
     {
+        // Escape given username
         $escUsername = mysqli_real_escape_string($connection, $username);
 
         $sql = 'SELECT `users`.`id` '
@@ -27,6 +36,7 @@ function is_username_available($username)
 
         $query = mysqli_query($connection, $sql);
 
+        // If query is successful an no rows founded
         if ($query && !$query->num_rows)
         {
             return TRUE;
@@ -35,12 +45,19 @@ function is_username_available($username)
     return FALSE;
 }
 
-function register_user($username, $password)
+/**
+ * Register new user
+ * @param string $username
+ * @param string $password
+ * @return boolean
+ */
+function register($username, $password)
 {
     $connection = get_connection();
 
     if ($connection)
     {
+        // Escape username and password
         $escUsername = mysqli_real_escape_string($connection, $username);
         $escPassword = mysqli_real_escape_string($connection, $password);
 
@@ -48,6 +65,7 @@ function register_user($username, $password)
                 . '(`username`, `password`, `date_created`) '
                 . "VALUES (\"{$escUsername}\", \"{$escPassword}\", UNIX_TIMESTAMP())";
 
+        // If query was successful
         if (mysqli_query($connection, $sql))
         {
             return TRUE;
@@ -57,12 +75,19 @@ function register_user($username, $password)
     return FALSE;
 }
 
+/**
+ * Login user
+ * @param string $username
+ * @param string $password
+ * @return boolean
+ */
 function login($username, $password)
 {
     $connection = get_connection();
 
     if ($connection)
     {
+        // Escape username and password
         $escUsername = mysqli_real_escape_string($connection, $username);
         $escPassword = mysqli_real_escape_string($connection, $password);
 
@@ -73,10 +98,12 @@ function login($username, $password)
 
         $query = mysqli_query($connection, $sql);
 
+        // If query was successful
         if ($query)
         {
             $user = $query->fetch_assoc();
 
+            // If there is such user, start session
             if ($user)
             {
                 $_SESSION['session_started'] = true;
@@ -89,7 +116,12 @@ function login($username, $password)
     return FALSE;
 }
 
-function get_messages($dateAscending = FALSE)
+/**
+ * Get all submitted messages
+ * @param boolean $dateAscending
+ * @return boolean
+ */
+function get_messages($dateAscending = TRUE)
 {
     $connection = get_connection();
 
@@ -104,10 +136,12 @@ function get_messages($dateAscending = FALSE)
 
         $query = mysqli_query($connection, $sql);
 
+        // If query was successful
         if ($query)
         {
             $result = array();
-
+            
+            // Iterate trough data and humanize it
             while ($row = $query->fetch_assoc())
             {
                 // Escape scpecial chars
@@ -124,12 +158,19 @@ function get_messages($dateAscending = FALSE)
     return FALSE;
 }
 
+/**
+ * Add new message to the database
+ * @param string $subject
+ * @param string $message
+ * @return boolean
+ */
 function save_message($subject, $message)
 {
     $connection = get_connection();
 
     if ($connection)
     {
+        // Escape subject and message body
         $escSubject = mysqli_real_escape_string($connection, $subject);
         $escMessage = mysqli_real_escape_string($connection, $message);
 
@@ -138,6 +179,7 @@ function save_message($subject, $message)
 
         $query = mysqli_query($connection, $sql);
 
+        // If query is successful
         if ($query)
         {
             return TRUE;

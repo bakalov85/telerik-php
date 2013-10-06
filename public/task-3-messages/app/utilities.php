@@ -17,42 +17,6 @@ function page_title($pageTitle)
 }
 
 /**
- * Gets all registered users
- * @return array
- */
-function get_users()
-{
-    $usersData = file($GLOBALS['config']['users_path']);
-
-    $users = array();
-
-    foreach ($usersData as $userData)
-    {
-        $userArray = explode($GLOBALS['config']['data_separator'], trim($userData));
-        $users[$userArray[0]] = $userArray[1];
-    }
-
-    return $users;
-}
-
-/**
- * Checks if login is successful
- * @param string $username
- * @param string $password
- * @return boolean
- */
-function is_valid_login($username, $password)
-{
-    $users = get_users();
-
-    if (isset($users[$username]) && $users[$username] == md5($password))
-    {
-        return TRUE;
-    }
-    return FALSE;
-}
-
-/**
  * Redirects to file
  * @param type $file
  */
@@ -72,96 +36,6 @@ function is_logined()
 }
 
 /**
- * Gets files in given folder
- * @param string $dir
- * @return array|boolean
- */
-function get_dir_files($dir)
-{
-    if (is_dir($dir))
-    {
-        $contents = scandir($dir);
-    }
-
-    if (isset($contents) && count($contents) > 2)
-    {
-        return array_slice($contents, 2);
-    }
-
-    return FALSE;
-}
-
-/**
- * Generates human readable file data
- * @param type $fileList
- * @param type $dir
- * @return array
- */
-function generate_files_data($fileList, $dir = '')
-{
-    $list = array();
-
-    foreach ($fileList as $i => $f)
-    {
-        $file = $dir . DIRECTORY_SEPARATOR . $f;
-
-        $fileData['index'] = $i + 1;
-        $fileData['name'] = $f;
-        $fileData['date'] = date('d-m-Y', filemtime($file));
-        $fileData['size'] = number_format(filesize($file), 0, '.', ' ');
-        $fileData['url'] = '';
-
-        array_push($list, $fileData);
-    }
-
-    return $list;
-}
-
-/**
- * 
- * @return string
- */
-function get_user_dir_path()
-{
-    return $GLOBALS['config']['files_path'] . DIRECTORY_SEPARATOR . $_SESSION['username'];
-}
-
-/**
- * @param string $filename
- * @return string
- */
-function get_user_file_path($filename)
-{
-    return get_user_dir_path() . DIRECTORY_SEPARATOR . $filename;
-}
-
-/**
- * Downloads file
- * @author marro <marro@email.cz>
- * @link http://www.php.net/manual/en/function.readfile.php#81925
- * @param string $file
- */
-function download_file($file)
-{ // $file = include path 
-    if (file_exists($file))
-    {
-        header('Content-Description: File Transfer');
-        header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename=' . basename($file));
-        header('Content-Transfer-Encoding: binary');
-        header('Expires: 0');
-        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-        header('Pragma: public');
-        header('Content-Length: ' . filesize($file));
-        ob_clean();
-        flush();
-        readfile($file);
-        return true;
-    }
-    return false;
-}
-
-/**
  * If file consists only alphanumeric and dashes
  * @param string $filename
  * @return boolean
@@ -177,6 +51,11 @@ function is_valid_username($username)
     return FALSE;
 }
 
+/**
+ * Generate html of errors from array
+ * @param array $errors
+ * @return string
+ */
 function display_errors($errors)
 {
     $html = '';
@@ -194,6 +73,13 @@ function display_errors($errors)
     return $html;
 }
 
+/**
+ * If given string fits in range
+ * @param string $str
+ * @param integer $min
+ * @param integer $max
+ * @return boolean
+ */
 function validate_strlen($str, $min, $max = FALSE)
 {
     $length = mb_strlen($str);

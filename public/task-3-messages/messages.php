@@ -15,7 +15,11 @@ $menu = array(
     'logout.php' => "Изход <b>{$_SESSION['username']}</b>",
 );
 
-$list = get_messages();
+// Sort order
+$order = isset($_GET['asc']) ? (bool)($_GET['asc']) : FALSE;
+
+// Get all messages
+$list = get_messages($order);
 ?>
 
 <?php include './templates/_header.php'; ?>
@@ -36,7 +40,7 @@ $list = get_messages();
                     Потребител
                 </th>
                 <th>
-                    Дата
+                    <a href="?asc=<?=(int)(!$order)?>" class="anchor-mask">Дата <?= ($order) ? '&uarr;' : '&darr;'; ?></a>
                 </th>
                 <th>
                     Прочети
@@ -61,7 +65,7 @@ $list = get_messages();
                             <?= $msg['date']; ?>
                         </td>
                         <td>
-                            <a href="#" class="preview">Преглед</a>
+                            <a href="#" class="preview anchor-mask">Преглед &raquo;</a>
                             <div class="preview-container">
                                 <?= $msg['content']; ?>
                             </div>

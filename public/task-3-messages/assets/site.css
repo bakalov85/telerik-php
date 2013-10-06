@@ -101,6 +101,9 @@ header {
     color: grey;
 }
 
+a.preview.anchor-mask {
+    color: royalblue;
+}
 .preview:hover+.preview-container {
     opacity: 1;
     height: auto;
@@ -123,3 +126,9 @@ header {
     -o-transition: opacity 0.5s;
     transition: opacity 0.5s;
 }
+
+.anchor-mask {color: inherit;text-decoration: none;}
+.anchor-mask:link {color: inherit;}
+.anchor-mask:active {color: inherit;}
+.anchor-mask:visited {color: inherit;}
+.anchor-mask:hover {color: #999; }
