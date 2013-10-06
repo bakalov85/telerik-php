@@ -6,10 +6,11 @@
 function get_connection()
 {
     $conf = $GLOBALS['config']['db'];
-    $connection = mysqli_connect($conf['host'], $conf['username'], $conf['password'], $conf['database']);
+
+    @$connection = mysqli_connect($conf['host'], $conf['username'], $conf['password'], $conf['database']);
 
     if (!mysqli_connect_errno())
-    {
+      {
         return $connection;
     }
 
