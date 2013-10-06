@@ -68,11 +68,7 @@ if ($_POST)
         <br />
         <label>
             Съобщение:
-            <textarea type="text" name="message">
-
-                <?= (isset($message)) ? $message : ''; ?>
-
-            </textarea>
+            <textarea type="text" name="message"><?= (isset($message)) ? $message : ''; ?></textarea>
         </label>
         <p class="info">
             * Дължина от 1 до 250 символа
