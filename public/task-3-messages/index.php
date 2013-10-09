@@ -46,7 +46,7 @@ if ($_POST)
     <form id="form" method="POST">
         <label>
             Потребител:
-            <input type="text" name="username" />
+            <input type="text" name="username" value="<?= (isset($username)) ? $username : ''; ?>"/>
         </label>
         <br />
         <label>

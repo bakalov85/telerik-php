@@ -5,9 +5,13 @@
  */
 function get_connection()
 {
+    // This variable contains the same value, no matter how many times we call the function
+    static $connection;
     $conf = $GLOBALS['config']['db'];
 
-    @$connection = mysqli_connect($conf['host'], $conf['username'], $conf['password'], $conf['database']);
+    if ( !$connection) {
+        $connection = mysqli_connect($conf['host'], $conf['username'], $conf['password'], $conf['database']);
+    }
 
     if (!mysqli_connect_errno())
       {
